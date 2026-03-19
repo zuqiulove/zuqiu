@@ -1,27 +1,322 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>足球爱</title>
-    <script>
-        // 判断是否为移动设备
-        function isMobile() {
-            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            return /android|iphone|ipad|mobile/i.test(userAgent);
+    <title>绿茵天地 - 足球爱好者的家园</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        // 页面加载完成后执行判断
-        document.addEventListener('DOMContentLoaded', () => {
-            if (isMobile()) {
-                window.location.href = "https://zuqiu.love/wx.png"; // 移动端地址
-            } else {
-                window.location.href = "https://zuqiu.love/wx.png"; // PC端地址
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #1a2a6c, #2a5298, #3a7bd5);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 90%;
+            margin: 0 auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 1rem 0;
+            text-align: center;
+            color: white;
+            border-bottom: 2px solid #4CAF50;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding: 2rem 0;
+            flex: 1;
+        }
+
+        .content-section {
+            flex: 2;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .qr-section {
+            flex: 1;
+            min-width: 250px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #1a2a6c;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: #4CAF50;
+            margin: 0.5rem auto;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .features {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: #e3f2fd;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: #4CAF50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .qr-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .qr-placeholder {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, #4CAF50, #2196F3);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 5rem;
+        }
+
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .contact-info {
+            background: #e8f5e9;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin: 0.5rem 0;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            main {
+                flex-direction: column;
             }
-        });
-    </script>
+            
+            .content-section, .qr-section {
+                width: 100%;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .qr-placeholder {
+                width: 150px;
+                height: 150px;
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                width: 95%;
+            }
+            
+            .content-section, .qr-section {
+                padding: 1.5rem;
+            }
+            
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h2>正在加载，请稍候...</h2>
+    <div class="container">
+        <header>
+            <h1>⚽ 足球基地 ⚽</h1>
+            <p>连接全球足球爱好者的桥梁</p>
+        </header>
+
+        <main>
+            <section class="content-section">
+                <h2>欢迎来到足球基地</h2>
+                <p class="intro-text">
+                    我们是专注于为足球爱好者提供全方位信息服务的专业平台。无论你是狂热的球迷，
+                    还是业余足球参与者，这里都有你需要的一切足球资讯。
+                </p>
+
+                <div class="features">
+                    <div class="feature-item">
+                        <div class="feature-icon">🏆</div>
+                        <div>
+                            <strong>实时赛事资讯</strong>
+                            <p>全球各大联赛、杯赛最新动态一手掌握</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">📊</div>
+                        <div>
+                            <strong>专业数据分析</strong>
+                            <p>深度战术解析，球员数据统计</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">💬</div>
+                        <div>
+                            <strong>球迷互动社区</strong>
+                            <p>与千万球迷一起讨论交流</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <h3 style="color: #e65100; margin-bottom: 0.5rem;">⚠️ 重要提醒</h3>
+                    <p>
+                        很多球迷朋友反映经常找不到我们的官方联系方式，导致错过重要活动和福利信息。
+                        为了解决这个问题，我们特别推出了便捷联系通道！
+                    </p>
+                </div>
+
+                <div class="contact-info">
+                    <h3 style="margin-bottom: 1rem; color: #1a2a6c;">联系方式：</h3>
+                    <div class="contact-item">
+                        <span style="margin-right: 0.5rem">📧</span>
+                        <span>微信：hanlifeiyu888</span>
+                    </div>
+                    <div class="contact-item">
+                        <span style="margin-right: 0.5rem">🌐</span>
+                        <span>官网：www.zuqiu.love</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="qr-section">
+                <h2>扫码联系我们</h2>
+                <div class="qr-container">
+                    <div class="qr-placeholder">📱</div>
+                    <p style="font-weight: bold; margin-bottom: 0.5rem;">客服二维码</p>
+                    <p style="color: #666; font-size: 0.9rem;">
+                        长按识别二维码<br>
+                        添加官方微信
+                    </p>
+                </div>
+
+                <div style="background: #fff3e0; padding: 1rem; border-radius: 8px; text-align: center; margin-top: 1rem;">
+                    <p style="color: #e65100; font-weight: bold;">
+                        ✅ 永不失联<br>
+                        📱 随时随地找组织<br>
+                        🎁 第一时间获取福利
+                    </p>
+                </div>
+
+                <div style="margin-top: 2rem; text-align: center;">
+                    <p style="font-weight: bold; color: #d32f2f;">
+                        🔥 关注我们<br>
+                        解锁更多专属权益
+                    </p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 足球基地 - 专注足球文化传播</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">
+                让每一个热爱足球的人都能找到归属
+            </p>
+        </footer>
+    </div>
 </body>
 </html>
